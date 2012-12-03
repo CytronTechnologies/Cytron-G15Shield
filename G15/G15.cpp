@@ -378,8 +378,8 @@ word G15::SetID(byte NewID)
 	if(error != 0x0000)
   {
     ServoID=NewID; 
-    delay(10); 			//delay for eeprom write
   }
+  delay(10); 			//delay for eeprom write
   return(error);
  }	
 
