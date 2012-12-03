@@ -368,18 +368,20 @@ word G15::SetVoltageLimit(byte VoltageLow, byte VoltageHigh)
 //******************************************************************
 word G15::SetID(byte NewID)
 {
-    byte TxBuff[2];
+  byte TxBuff[2];
 	word error; 
 	
-    TxBuff[0] = ID;			//Control Starting Address
+  TxBuff[0] = ID;			//Control Starting Address
 	TxBuff[1] = NewID;	
 	
 	error=send_packet(ServoID, iWRITE_DATA, TxBuff, 2);
-	ServoID=NewID; 
-	delay(10); 			//delay for eeprom write
-    return(error);
-	
-}	
+	if(error != 0x0000)
+  {
+    ServoID=NewID; 
+    delay(10); 			//delay for eeprom write
+  }
+  return(error);
+ }	
 
 //******************************************************************
 //*	SET LED
