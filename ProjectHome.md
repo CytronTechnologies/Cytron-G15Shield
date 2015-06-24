@@ -1,0 +1,5 @@
+Cytron G15 Shield is a shield for controlling Cytron’s [G15 Cube Servo](http://www.cytron.com.my/viewProduct.php?pid=NzgIAyY1NzkGDzITKjMRIYYmFZsFAKCVNg2CEuolxkk=) and Robotis Dynamixel AX-12 servo motor. It is compatible with Arduino UNO, Arduino Duemilanove, Arduino Mega, Arduino Leonardo and possibly other pin compatible main boards.
+![http://www.cytron.com.my/usr_images/products/screen/7109.jpg](http://www.cytron.com.my/usr_images/products/screen/7109.jpg)
+
+This shield has two ports for Cytron’s G15 Cube Servo and two ports for Robotis’ Dynamixel AX-12 servo. Both G15 and AX-12 servos are serial servos. Hence more than one servo can be daisy-chained in series. User may choose to supply the servo motor from Arduino's VIN or the External Power port of Cytron G15 Shield. It also has stackable side headers which allows otherArduino shields to be stacked on top of it.
+![http://www.cytron.com.my/usr_images/products/screen/7112.jpg](http://www.cytron.com.my/usr_images/products/screen/7112.jpg)
