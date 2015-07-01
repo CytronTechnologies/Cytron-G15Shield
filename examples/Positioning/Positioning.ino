@@ -35,7 +35,9 @@ G15 servo2(2);
 void setup(){
   
 //initialize the arduino main board's serial/UART and Control Pins
-  G15ShieldInit(19200,3,8); 
+//void G15ShieldInit(long baudrate, byte rx, byte tx, char G15_CTRL)
+//G15ShieldInit(19200,2,3,8); //For Shield G15 
+  G15ShieldInit(19200,10,11,2); //For Shield G15 Rev 2.0
   
 //call the init function to init servo obj
   servo1.init();           

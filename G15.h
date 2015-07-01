@@ -2,7 +2,15 @@
 #define G15_h
 
 #include "Arduino.h"
+#include "SoftwareSerial.h" 
 
+
+//Arduino Leonardo
+#if defined (__AVR_ATmega32U4__)
+	#define Serial Serial1
+#else 
+	#define Serial Serial
+#endif
 
 //definitions
 //******************************************************************
@@ -17,10 +25,10 @@
 #define iSYNC_WRITE     0x83 //simultaneously control multiple actuators
 
 #define SerialTimeOut 100L 
-#define TxMode LOW
-#define RxMode HIGH
+#define TxMode LOW		//Master Transmit to G15
+#define RxMode HIGH		//Master Receive from G15
 #define ConvertAngle2Pos(Angle) word(word(Angle)*1088UL/360UL)
-#define ConvertPos2Angle(Pos) float(Pos)*360.0/1088.0)
+#define ConvertPos2Angle(Pos) float(Pos)*360.0/1088.0
 #define ConvertTime(Time) word(Time*10UL)
 #define CW 1
 #define CCW 0
@@ -90,9 +98,10 @@ enum{
 	
 
 //function protos	
-void G15ShieldInit(long baud, char G15_CTRL, char AX12_CTRL); 
+void G15ShieldInit(long baudrate, byte rx, byte tx, char G15_CTRL); 
 void set_act(char ctrl);  
-//void waitTXC(void); 
+
+//class, Object and Variable 
 
 
 class G15
@@ -113,6 +122,7 @@ class G15
 		//*=========Normal Positioning Mode========================================================================
 		//(Rotation limited by Angle Limit and Direction of Rotation determined by operation section of Angle Limit)
 		word SetPos(word Position, byte Write_Reg);
+		word SetPosSpeed(word Position, word Speed, byte Write_Reg);
 		//byte SetPosAngle(word Angle, byte Write_Reg); 	//replaced with ConvertAngle()
 		
 		//*========Direction Positioning Mode======================================================================
@@ -164,32 +174,13 @@ class G15
 		
 	protected:
 		
-		char TxRx;	
-		
+		char TxRx;				
 		void setRX(void);
 		void setTX(void);
 		word send_packet(byte ID, byte inst, byte* data, byte param_len);	
-		byte read_data(byte id, byte* data); 
-	
+		//byte read_data(byte id, byte* data); 
 		
 
 };
-
-class AX12:public G15{
-
-public: 		
-	  AX12(byte ID) ;//, char ctrl); 
-	  word SetBaudRate(long bps);
-	  void init(void); 
-	  static void SetAction(void);
-
-protected: 
-	  	
-	
-
-}; 
-
-
-
 
 #endif

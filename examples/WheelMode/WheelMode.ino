@@ -25,43 +25,45 @@ byte DATA[10];
 word STATUS;
 
 //declare G15 Class Object
-//servo1 array with ID of 0,1,2 and 3
-G15 servo[4]={0,1,2,3};
+//servo1 ID=0x01
+G15 servo1(0x01); 
 
 
 void setup(){
   
 //initialize the arduino main board's serial/UART and Control Pins
-//CTRL pin for G15 =3 and AX12 =8
-  G15ShieldInit(19200,3,8); 
+//G15DriverInit(long baudrate, byte rx, byte tx, char G15_CTRL)
+ // G15ShieldInit(19200,2,3,8); //For Shield G15
+  G15ShieldInit(19200,10,11,2); //For Shield G15 Rev 2.0
+  Serial.begin(9600);  
   
 //call the init function to init servo obj
-
-  for(int i=0; i<4; i++)
-  {
-    servo[i].init();
-  }    
+  servo1.init();           
 
 //init LED indicator as output
   pinMode(LED_BOARD,OUTPUT);  
   digitalWrite(LED_BOARD, LOW); 
   
-  delay(3000); 
+  delay(1000); 
   
 }
 void loop(){
    
-  for(int i=0; i<4; i++)
-  {
-    servo[i].SetLED(ON, iWRITE_DATA); 
-    servo[i].SetPos(ConvertAngle2Pos(0),iWRITE_DATA);
-    delay(1000); 
-    servo[i].SetPos(ConvertAngle2Pos(90),iWRITE_DATA);
-    delay(1000); 
-    servo[i].SetLED(OFF, iWRITE_DATA); 
-    
-  }
-  
+      servo1.SetWheelMode();
+      Serial.print("\nCW Rotate at speed ");
+      Serial.print(0x3FF,DEC);
+      servo1.SetWheelSpeed(0x03FF,CW); 
+      delay(5000); 
+      Serial.print("\nCCW Rotate at speed ");
+      Serial.print(0x200,DEC);
+      servo1.SetWheelSpeed(0x200,CCW); 
+      delay(5000);
+     
+      servo1.ExitWheelMode(); 
+      
+      delay(100);      
+      
+      while(1); //stop
       
       
 }

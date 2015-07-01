@@ -8,34 +8,40 @@
 #include "G15.h"
 //variables
  char G15CTRL; 
- char AX12CTRL;
+ boolean HW;	
+ SoftwareSerial* mySerial;
 
-// This Code is using Serial library, hence
+// This Code is using Serial library
 // baudrate 300, 1200, 2400, 4800, 9600, 14400, 19200, 28800, 38400, 57600, or 115200
-// tested to run baudrate at 500k, no problem
-//EN1 Ctrl pin can be D8 or D2 for AX12 port
-//EN2 ctrl pin can be D9 or D3 for G15 port
+void G15ShieldInit(long baudrate, byte rx, byte tx, char G15_CTRL){
 
-void G15ShieldInit(long baud, char G15_CTRL, char AX12_CTRL){
-	Serial.begin (baud) ; 
-	Serial.setTimeout(SerialTimeOut); 
+	if(tx==1 && rx==0)
+	{
+		HW=true; 
+		Serial.begin(baudrate); 		
+		while (!Serial) {
+		; // wait for serial port to connect. Needed for Leonardo only
+		}
+		Serial.setTimeout(SerialTimeOut); 
+		
+	}
+	else
+	{
+		HW=false; 
+		pinMode(rx,INPUT); 
+		pinMode(tx,OUTPUT); 
+		mySerial=new SoftwareSerial(rx, tx); 			 
+		mySerial->begin(baudrate);			
+		mySerial->setTimeout(SerialTimeOut); 
+			
+	}	
+	
 	G15CTRL=G15_CTRL;
-	AX12CTRL=AX12_CTRL;
-	
 	pinMode(G15CTRL, OUTPUT);		//control pin setup	
-	pinMode(AX12CTRL, OUTPUT);		//control pin setup	
-	
 	digitalWrite(G15CTRL,TxMode);
-	digitalWrite(AX12CTRL,TxMode);
 	
 
 }
-// void waitTXC(void){  // use to wait until all data has left Arduino before changing buffer direction
-
-      // bitSet(UCSR0A, TXC0);
-      // while (bit_is_clear(UCSR0A, TXC0));
-// }
-
 
 G15::G15(byte ID)	//, char ctrl)
 {   
@@ -43,23 +49,11 @@ G15::G15(byte ID)	//, char ctrl)
   init();
 }
 
-AX12::AX12(byte ID):G15(ID) //,ctrl)			//inherit G15 constructor
-{
-	// Add more initializations here if exist
-
-}
-
 void G15::init(void)
 {
 	TxRx=G15CTRL; 	
    
 }
-void AX12::init(void)
-{
-	TxRx=AX12CTRL;
-	pinMode(TxRx, OUTPUT);		//control pin setup	
-	setTX(); 
-}	
 
 void G15::setTX(void){  // set the dynamixel bus buffer direction to out
 
@@ -76,6 +70,7 @@ void G15::setRX(void){ // set the dynamixel bus buffer direction to in
 
 word G15::send_packet(byte ID, byte inst, byte* data, byte param_len)	
 {
+	byte readcount=0;
 	int i; 
 	byte packet_len = 0;
     byte TxBuff[16];	
@@ -101,13 +96,20 @@ word G15::send_packet(byte ID, byte inst, byte* data, byte param_len)
 
     packet_len = TxBuff[3] + 4;			//# of bytes for the whole packet
     
-	for(i=0; i<packet_len;i++){
-		Serial.write(TxBuff[i]);
+	if(HW==true)
+	{
+		for(i=0; i<packet_len;i++){
+			Serial.write(TxBuff[i]);
+		}
+		Serial.flush();
 	}
-	Serial.flush();
-	//waitTXC();		//arduino version 1.01 only
-       
-    //Status[4]=0x00;		//clear status byte
+	else
+	{
+		for(i=0; i<packet_len;i++){
+			mySerial->write(TxBuff[i]);
+		}
+		mySerial->flush();
+	}
 	
     // we'll only get a reply if it was not broadcast
     if((ID != 0xFE) || (inst == iPING))
@@ -123,14 +125,15 @@ word G15::send_packet(byte ID, byte inst, byte* data, byte param_len)
 		}
 
 		
-		setRX(); 						//set to receive mode and start receiving from G15		
-		byte readcount= Serial.readBytes(Status, packet_len); 
+		setRX(); 						//set to receive mode and start receiving from G15	
+
+		if(HW==true)
+			readcount= Serial.readBytes(Status, packet_len); 
+		else
+			readcount= mySerial->readBytes(Status, packet_len); 
 		
 		setTX();  						//set back to tx mode to prevent noise into buffer
 		
-		// Serial.write(0xAA); 
-		// for(i=0; i<packet_len; i++)
-			// Serial.write(Status[i]); 
 			
 		//Checking received bytes
 		error=0; 		//clear error 
@@ -228,6 +231,19 @@ word G15::SetPos(word Position, byte Write_Reg)
 	return(send_packet(ServoID, Write_Reg, TxBuff, 3));
 }
 
+word G15::SetPosSpeed(word Position, word Speed, byte Write_Reg)
+{
+	byte TxBuff[5];	
+	
+    TxBuff[0] = GOAL_POSITION_L;	//Control Starting Address
+	TxBuff[1] = byte (Position&0x00FF);  			//goal pos bottom 8 bits
+    TxBuff[2] = byte (Position>>8); 			//goal pos top 8 bits
+	TxBuff[3] = byte (Speed&0x00FF);  			//Speed bottom 8 bits
+    TxBuff[4] = byte (Speed>>8); 			//Speed top 8 bits
+
+	// write the packet, return the error code
+	return(send_packet(ServoID, Write_Reg, TxBuff, 5));
+}
 /* byte G15::SetPosAngle(word Angle, byte Write_Reg){
 
 	return(SetPos(ConvertAngle(Angle),Write_Reg));
@@ -368,20 +384,18 @@ word G15::SetVoltageLimit(byte VoltageLow, byte VoltageHigh)
 //******************************************************************
 word G15::SetID(byte NewID)
 {
-  byte TxBuff[2];
+    byte TxBuff[2];
 	word error; 
 	
-  TxBuff[0] = ID;			//Control Starting Address
+    TxBuff[0] = ID;			//Control Starting Address
 	TxBuff[1] = NewID;	
 	
 	error=send_packet(ServoID, iWRITE_DATA, TxBuff, 2);
-	if(error != 0x0000)
-  {
-    ServoID=NewID; 
-  }
-  delay(10); 			//delay for eeprom write
-  return(error);
- }	
+	ServoID=NewID; 
+	delay(10); 			//delay for eeprom write
+    return(error);
+	
+}	
 
 //******************************************************************
 //*	SET LED
@@ -484,19 +498,7 @@ word G15::SetBaudRate(long bps)
     // write the packet, return the error code
     return(error);
 }
-word AX12::SetBaudRate(long bps)
-{
-	byte TxBuff[2];
-	word error;
 
-    TxBuff[0] = BAUD_RATE;			//Control Starting Address
-	TxBuff[1] = (2000000/bps)-1;	//Calculate baudrate
-									//Speed (BPS) = 2000000 / (Address4 + 1)
-	error=send_packet(ServoID, iWRITE_DATA, TxBuff, 2); 
-	delay(10); 
-    // write the packet, return the error code
-    return(error);
-}
 //******************************************************************
 //*	RESET TO FACTORY SETTINGS
 //* 	eg:	FactoryReset(1,1);// Reset servo 1
@@ -600,13 +602,6 @@ void G15::SetAction(void)
 
 }
 
-void AX12::SetAction(void){
-
-	// byte TxBuff[1];	//dummy byte
-	// send_packet(0xFE, iACTION, TxBuff, 0);
-	set_act(AX12CTRL); 
-}
-
 void set_act(char ctrl){
 
 	int i; 
@@ -627,11 +622,19 @@ void set_act(char ctrl){
 
     packet_len = TxBuff[3] + 4;			//# of bytes for the whole packet
     
-	for(i=0; i<packet_len;i++){
-		Serial.write(TxBuff[i]);
+	if(HW==true)
+	{
+		for(i=0; i<packet_len;i++){
+			Serial.write(TxBuff[i]);
+		}
+		Serial.flush();
 	}
-	Serial.flush();
-	//waitTXC();		//arduino version 1.01 only
-
+	else
+	{
+		for(i=0; i<packet_len;i++){
+			mySerial->write(TxBuff[i]);
+		}
+		mySerial->flush();	
+	}
 
 }
