@@ -9,6 +9,6 @@ Recommended product:<br/>
 <a href="http://www.cytron.com.my/p-g15" target="_blank">Cube Servo G15</a><br/><br/>
 There have 2 example sketches:<br/>
 <strong>Positioning</strong> - Control G15 knob to move a certain angle with different speed.<br/>
-<strong>WheelMode</strong> - Set G15 as wheel mode.
-<strong>SetNewID</strong> - How to set G15 to new ID
+<strong>WheelMode</strong> - Set G15 as wheel mode.<br/>
+<strong>SetNewID</strong> - How to set G15 to new ID<br/>
 <strong>WheelMode</strong> - Set and control G15 as wheel mode
