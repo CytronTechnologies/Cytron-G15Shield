@@ -1,84 +1,64 @@
-#include <G15.h>    // include the library
-#define LED_BOARD 13
+/*
+This example shows how to move G15 knob to certain angle with different speed.
 
+Function:
+  setLED(G15_ID, onOff); // Control G15 LED. onOff: ON or OFF
+  setSpeed(G15_ID, speed); // Set G15 speed: 0 - 1023
+  setPosAngle(G15_ID, angle); // Set G15 angle: 0 - 359
 
-/*Return Error definitions & Mask
-=====Higher 8 bits of Word=========
-packet length error :       0x0100
-packet header error:        0x0200
-ID mismatch error:          0x0400
-packet checksum mismatch :  0x0800
-====Lower 8 bits of word==========
-Error status return by G15:
-INST			0x0040		
-OVERLOAD		0x0020
-CHECKSUM		0x0010
-RANGE			0x0008
-OVERHEAT		0x0004
-ANGLELIMIT 	        0x0002
-VOLTAGE		        0x0001
+Product page:
+  Cytron G15 Shield: http://www.cytron.com.my/p-shield-g15
+  G15 Cube Servo: http://www.cytron.com.my/p-g15
+  CT-UNO: http://www.cytron.com.my/p-ct-uno
+
+Original written by:
+            Ing Hui, Cytron Technologies
+
+Modified:
+  29/06/15  Idris, Cytron Technologies
 */
 
+#include <SoftwareSerial.h>
+#include <Cytron_G15Shield.h>
 
-//declaration of variables & object
-word ERROR=0;
-byte DATA[10]; 
-word STATUS;
+Cytron_G15Shield g15(2, 3, 8); // SoftwareSerial: Rx, Tx and Control pin
+//Cytron_G15Shield g15(8); // HardwareSerial: Control pin
 
-//declare G15 Class Object
-//servo1 ID=1
-G15 servo1(1); 
-//servo2 ID=2
-G15 servo2(2); 
+#define G15_1 1
+#define G15_2 2
+#define LED 13
 
+void setup()
+{
+  g15.begin(19200);
 
-void setup(){
-  
-//initialize the arduino main board's serial/UART and Control Pins
-//void G15ShieldInit(long baudrate, byte rx, byte tx, char G15_CTRL)
-//G15ShieldInit(19200,2,3,8); //For Shield G15 
-  G15ShieldInit(19200,10,11,2); //For Shield G15 Rev 2.0
-  
-//call the init function to init servo obj
-  servo1.init();           
-  servo2.init(); 
-
-//init LED indicator as output
-  pinMode(LED_BOARD,OUTPUT);  
-  digitalWrite(LED_BOARD, LOW); 
-  
-  delay(500); 
-  digitalWrite(LED_BOARD, HIGH);
-  
+  pinMode(LED, OUTPUT);
+  digitalWrite(LED, LOW);
+  delay(500);
+  digitalWrite(LED, HIGH);
 }
-void loop(){
-    
-    servo1.SetLED(ON,iWRITE_DATA);
-    
-    servo1.SetSpeed(500,iWRITE_DATA);
-    servo1.SetPos(ConvertAngle2Pos(0),iWRITE_DATA);    //goto 0 degree pos 
-    
-    delay(1000); 
-     
-    servo1.SetPos(ConvertAngle2Pos(90),iWRITE_DATA);   //goto 90 degree pos
-    servo1.SetSpeed(250,iWRITE_DATA);
-    
-     servo1.SetLED(OFF,iWRITE_DATA);
-    
-    delay(1000); 
-    
-    servo2.SetLED(ON,iWRITE_DATA);
-    
-    servo2.SetSpeed(250,iWRITE_DATA);
-    servo2.SetPos(ConvertAngle2Pos(0),iWRITE_DATA);     //goto 0 degree pos
-    
-    delay(1000); 
-    
-    servo2.SetSpeed(500,iWRITE_DATA);
-    servo2.SetPos(ConvertAngle2Pos(90),iWRITE_DATA);   //goto 90 degree pos
-    
-    servo2.SetLED(OFF,iWRITE_DATA);
-    delay(1000); 
-    
 
+void loop()
+{
+  // Controlling G15 with ID 1
+  g15.setLED(G15_1, ON);
+  g15.setSpeed(G15_1, 500); // Set G15 (ID = 1) speed to 500, 
+  g15.setPosAngle(G15_1, 0); // Set G15 (ID = 1) position to 0 deg
+  delay(1000);
+
+  g15.setLED(G15_1, OFF);
+  g15.setSpeed(G15_1, 250);
+  g15.setPosAngle(G15_1, 90); // Set G15 (ID = 1) position to 90 deg
+  delay(1000); 
+
+  // Controlling G15 with ID 2
+  g15.setLED(G15_2, ON);
+  g15.setSpeed(G15_2, 250);
+  g15.setPosAngle(G15_2, 0); // Set G15 (ID = 2) position to 0 deg
+  delay(1000);
+
+  g15.setLED(G15_2, OFF);
+  g15.setSpeed(G15_2, 500);
+  g15.setPosAngle(G15_2, 90); // Set G15 (ID = 2) position to 90 deg
+  delay(1000);
 }

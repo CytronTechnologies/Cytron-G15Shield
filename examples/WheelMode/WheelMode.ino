@@ -1,69 +1,53 @@
-#include <G15.h>    // include the library
-#define LED_BOARD 13
+/*
+This example shows how to set and control G15 as wheel mode.
 
+Function:
+  setWheelMode(G15_ID); // Set G15 to wheel mode
+  setWheelSpeed(G15_ID, speed, direction); // speed: 0 - 1023
+                                           // direction: CW or CCW
+  exitWheelMode(G15_ID); // Set G15 to angle mode
 
-/*Return Error definitions & Mask
-=====Higher 8 bits of Word=========
-packet length error :       0x0100
-packet header error:        0x0200
-ID mismatch error:          0x0400
-packet checksum mismatch :  0x0800
-====Lower 8 bits of word==========
-Error status return by G15:
-INST			0x0040		
-OVERLOAD		0x0020
-CHECKSUM		0x0010
-RANGE			0x0008
-OVERHEAT		0x0004
-ANGLELIMIT 	        0x0002
-VOLTAGE		        0x0001
+Product page:
+  Cytron G15 Shield: http://www.cytron.com.my/p-shield-g15
+  G15 Cube Servo: http://www.cytron.com.my/p-g15
+  CT-UNO: http://www.cytron.com.my/p-ct-uno
+
+Original written by:
+            Ing Hui, Cytron Technologies
+
+Modified:
+  29/06/15  Idris, Cytron Technologies
 */
 
-//declaration of variables & object
-word ERROR=0;
-byte DATA[10]; 
-word STATUS;
+#include <SoftwareSerial.h>
+#include <Cytron_G15Shield.h>
 
-//declare G15 Class Object
-//servo1 ID=0x01
-G15 servo1(0x01); 
+Cytron_G15Shield g15(2, 3, 8); // SoftwareSerial: Rx, Tx and Control pin
+//Cytron_G15Shield g15(8); // HardwareSerial: Control pin
 
+#define G15_1 1
+#define LED 13
 
-void setup(){
+void setup()
+{
+  g15.begin(19200); // G15 default baudrate
   
-//initialize the arduino main board's serial/UART and Control Pins
-//G15DriverInit(long baudrate, byte rx, byte tx, char G15_CTRL)
- // G15ShieldInit(19200,2,3,8); //For Shield G15
-  G15ShieldInit(19200,10,11,2); //For Shield G15 Rev 2.0
-  Serial.begin(9600);  
-  
-//call the init function to init servo obj
-  servo1.init();           
-
-//init LED indicator as output
-  pinMode(LED_BOARD,OUTPUT);  
-  digitalWrite(LED_BOARD, LOW); 
-  
-  delay(1000); 
-  
+  pinMode(LED, OUTPUT);
+  digitalWrite(LED, LOW);
+  delay(1000);
 }
-void loop(){
-   
-      servo1.SetWheelMode();
-      Serial.print("\nCW Rotate at speed ");
-      Serial.print(0x3FF,DEC);
-      servo1.SetWheelSpeed(0x03FF,CW); 
-      delay(5000); 
-      Serial.print("\nCCW Rotate at speed ");
-      Serial.print(0x200,DEC);
-      servo1.SetWheelSpeed(0x200,CCW); 
-      delay(5000);
-     
-      servo1.ExitWheelMode(); 
-      
-      delay(100);      
-      
-      while(1); //stop
-      
-      
+
+void loop()
+{
+  digitalWrite(LED, HIGH);
+  g15.setWheelMode(G15_1); // Set G15 to wheel mode
+  g15.setWheelSpeed(G15_1, 1023, CW); // Full speed with CW direction
+  delay(5000);
+
+  g15.setWheelSpeed(G15_1, 512, CCW); // Half speed with CCW direction
+  delay(5000);
+
+  digitalWrite(LED, LOW);
+  g15.exitWheelMode(G15_1); // Set G15 to angle mode
+  delay(1000);
 }

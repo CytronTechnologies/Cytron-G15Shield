@@ -5,41 +5,37 @@
 #######################################
 # Datatypes (KEYWORD1)
 #######################################
-
-G15  	KEYWORD1
-ServoID KEYWORD1
-CW	KEYWORD1
-CCW	KEYWORD1	
-ON	KEYWORD1
-OFF	KEYWORD1
+Cytron_G15Shield	KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)
 #######################################
-G15ShieldInit	KEYWORD2
-init	KEYWORD2
-SetWheelMode	KEYWORD2	
-ExitWheelMode	KEYWORD2
-SetWheelSpeed	KEYWORD2
-SetPos		KEYWORD2
-SetPosSpeed	KEYWORD2
-SetTorque	KEYWORD2
-SetLED		KEYWORD2
-SetSpeed	KEYWORD2
-SetID		KEYWORD2
-SetAngleLimit	KEYWORD2
-SetBaudRate	KEYWORD2
-FactoryReset	KEYWORD2
-Ping		KEYWORD2
-GetPos		KEYWORD2
-GetTorque	KEYWORD2
-IsMoving	KEYWORD2
-SetAction	KEYWORD2
-RotateCW	KEYWORD2	
-RotateCCW	KEYWORD2
-
+begin	KEYWORD2
+setWheelMode	KEYWORD2	
+exitWheelMode	KEYWORD2
+setWheelSpeed	KEYWORD2
+setPos	KEYWORD2
+setPosAngle	KEYWORD2
+setPosSpeed	KEYWORD2
+setTorque	KEYWORD2
+setLED	KEYWORD2
+setSpeed	KEYWORD2
+setID	KEYWORD2
+setAngleLimit	KEYWORD2
+setBaudRate	KEYWORD2
+factoryReset	KEYWORD2
+ping	KEYWORD2
+getPos	KEYWORD2
+getTorque	KEYWORD2
+isMoving	KEYWORD2
+setAction	KEYWORD2
+rotateCW	KEYWORD2	
+rotateCCW	KEYWORD2
 
 #######################################
 # Constants (LITERAL1)
 #######################################
-
+CW	LITERAL1
+CCW	LITERAL1	
+ON	LITERAL1
+OFF	LITERAL1
