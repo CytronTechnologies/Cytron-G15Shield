@@ -18,13 +18,13 @@ word GetLoad(byte `*` data);
 Error status in word. If return is non-zero, error occurred. Refer ReturnStatus.
 
 ## Example ##
-word stat,load=0;
+  word stat,load=0;
 
-byte data`[`4`]`;
+  byte data`[`4`]`;
 
-stat = servo1.GetLoad(data);  //get the current load from servo1
+  stat = servo1.GetLoad(data);  //get the current load from servo1
 
-load=data`[`0`]`;
+  load=data`[`0`]`;
 
 load|=word(data`[`1`]`)<<8;
 
