@@ -285,7 +285,7 @@ uint16_t Cytron_G15Shield::setSpeed(uint8_t servoID, uint16_t speed)
 } 
 
 //********************************************************************
-uint16_t Cytron_G15Shield::setTimetoGoal(uint8_t servoID, uint16_t time)
+uint16_t Cytron_G15Shield::setTimeToGoal(uint8_t servoID, uint16_t time)
 {
 	time = time & 0x0FFF;
 	time = time | 0x8000; // Bit 15 represents the time to goal pos mode

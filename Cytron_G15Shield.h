@@ -137,7 +137,7 @@ class Cytron_G15Shield
 		//*=======Torque Enable and Speed Control==================================================================
 		uint16_t setTorqueOnOff(uint8_t servoID, uint8_t onOff);
 		uint16_t setSpeed(uint8_t servoID, uint16_t speed);
-		uint16_t setTimetoGoal(uint8_t servoID, uint16_t time);
+		uint16_t setTimeToGoal(uint8_t servoID, uint16_t time);
 		
 		//*=======Set Maximum Limits===============================================================================
 		uint16_t setAngleLimit(uint8_t servoID, uint16_t cwAngle, uint16_t ccwAngle);

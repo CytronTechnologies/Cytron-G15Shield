@@ -1,17 +1,17 @@
-# setAlarmLED() #
+# setAlarmShutDown() #
 
 ## Description ##
-This function sets the G15 alarm LED to blink on defined errors.
+This function sets the G15 to shutdown on defined errors.
 
 ## Include ##
 Cytron_G15Shield.h
 
 ## Prototype ##
-		uint16_t setAlarmLED(servoID, uint8_t alarmLED);
+		uint16_t setAlarmShutDown(servoID, uint8_t alarm);
 
 ## Parameters ##
 **servoID**: G15's servo ID<br/>
-**alarmLED**: 1 bytes of alarmLED which every bits represent different errors. User can set the alarm LED to blink on several errors by setting the corresponding bit.<br/>
+**alarm**: 1 bytes of alarm which every bits represent different errors. User can set the alarm LED to blink on several errors by setting the corresponding bit.<br/>
 Bit 7: Reserved<br/>
 Bit 6: Instruction Error<br/>
 Bit 5: Overload Error<br/>
@@ -25,4 +25,4 @@ Bit 0: Input Voltage Error
 Error status in word. If return is non-zero, error occurred. Refer Return Status.
 
 ## Example ##
-		g15.setAlarmLED(1, 0x7F); // Set G15 with ID number 1 to alarm LED on all errors
+		g15.setAlarmShutDown(1, 0x36); // Set G15 with ID number 1 to shut down on Overload Error, Checksum Error, Overheating Error and Angle Limit Error

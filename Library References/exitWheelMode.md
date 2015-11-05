@@ -13,7 +13,7 @@ Cytron_G15Shield.h
 **servoID**: G15's servo ID
 
 ## Returns ##
-Error status in 2 bytes. If return is non-zero, error occurred. Refer Return Status.
+Error status in word. If return is non-zero, error occurred. Refer Return Status.
 
 ## Example ##
 		g15.exitWheelMode(1); // Exit wheel mode for G15 with ID number 1

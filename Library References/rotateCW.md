@@ -14,7 +14,7 @@ Cytron_G15Shield.h
 **position**: Set goal position, start from 0 to 1087.
 
 ## Returns ##
-Error status in 2 bytes. If return is non-zero, error occurred. Refer Return Status.
+Error status in word. If return is non-zero, error occurred. Refer Return Status.
 
 ## Example ##
 		g15.rotateCW(1, 1000); // Command G15 with ID number 1 to rotate to the position of 1000 in clockwise direction
