@@ -4,7 +4,7 @@
 Set the serial baudrate of Arduino board and begin the serial communication with G15. Make sure the baudrate is match with G15 baudrate. Default baudrate is 19200.
 
 ## Include ##
-Cytron_G15Shield.h
+		Cytron_G15Shield.h
 
 ## Prototype ##
 begin(baudrate);
@@ -16,4 +16,4 @@ begin(baudrate);
 None
 
 ## Example ##
-g15.begin(19200);
+		g15.begin(19200);

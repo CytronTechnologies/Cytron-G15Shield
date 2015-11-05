@@ -1,13 +1,13 @@
-# getLoad() #
+# ping() #
 
 ## Description ##
-This function is to retrieve the current load of the servo.
+To request the status packet from a particular servo. The data byte is passed by pointer and it will be overwritten with ID of the servo if successful.
 
 ## Include ##
 Cytron_G15Shield.h
 
 ## Prototype ##
-		uint16_t getLoad(servoID, uint8_t *data);
+		uint16_t ping(servoID, uint8_t *data);
 
 ## Parameters ##
 **servoID**: G15's servo ID<br/>
@@ -17,11 +17,9 @@ Cytron_G15Shield.h
 Error status in 2 bytes. If return is non-zero, error occurred. Refer Return Status.
 
 ## Example ##
-		word status, load = 0;
+		word status;
 		byte data[2];
-		status = g15.getLoad(1, data); // Read current load from G15 with ID number 1
-		load = data[0];
-		load = load | (word)(data[1] << 8);
+		status = g15.ping(1, data); // Ping G15 with ID number 1, if succeed correct ID number will be stored in data
 
 ## See Also ##
 Return Status

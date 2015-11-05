@@ -1,13 +1,14 @@
-# getLoad() #
+# getPos() #
 
 ## Description ##
-This function is to retrieve the current load of the servo.
+This function retrieve the current position of the servo. The position is in the range from 0 to 1087.<br/>
+Use ConvertPos2Angle() macro to convert to angle value in degree. The macro return value in float format.
 
 ## Include ##
 Cytron_G15Shield.h
 
 ## Prototype ##
-		uint16_t getLoad(servoID, uint8_t *data);
+		uint16_t getPos(servoID, uint8_t *data);
 
 ## Parameters ##
 **servoID**: G15's servo ID<br/>
@@ -19,7 +20,7 @@ Error status in 2 bytes. If return is non-zero, error occurred. Refer Return Sta
 ## Example ##
 		word status, load = 0;
 		byte data[2];
-		status = g15.getLoad(1, data); // Read current load from G15 with ID number 1
+		status = g15.getPos(1, data); // Read current position from G15 with ID number 1
 		load = data[0];
 		load = load | (word)(data[1] << 8);
 

@@ -1,13 +1,13 @@
-# getLoad() #
+# isMoving() #
 
 ## Description ##
-This function is to retrieve the current load of the servo.
+This function reads whether G15 Cube Servo has reached its goal position or still moving.
 
 ## Include ##
 Cytron_G15Shield.h
 
 ## Prototype ##
-		uint16_t getLoad(servoID, uint8_t *data);
+		uint16_t isMoving(servoID, uint8_t *data);
 
 ## Parameters ##
 **servoID**: G15's servo ID<br/>
@@ -19,7 +19,7 @@ Error status in 2 bytes. If return is non-zero, error occurred. Refer Return Sta
 ## Example ##
 		word status, load = 0;
 		byte data[2];
-		status = g15.getLoad(1, data); // Read current load from G15 with ID number 1
+		status = g15.isMoving(1, data); // Read current moving status from G15 with ID number 1
 		load = data[0];
 		load = load | (word)(data[1] << 8);
 
