@@ -17,4 +17,4 @@ Angle position value, 0 to 359
 
 ## Example ##
 		word position;
-		position = ConvertPosToAngle(1000); // Convert angle to position value
+		position = ConvertPosToAngle(1000); // Convert position to angle value
