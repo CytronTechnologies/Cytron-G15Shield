@@ -18,8 +18,8 @@ Servo Returned Error (lower byte; bit 7 - 0)
 |10 |ID mismatch          |
 |9  |Wrong header         |
 |8  |Packet lost or receive time out|
-|   | |
-|Bit|Servo Returned Error|
+<br/>
+|Bit|**Servo Returned Error|
 |7  |--                   |
 |6  |Instruction error    |
 |5  |Overload error       |
