@@ -8,7 +8,7 @@ This return status word consists of return packet error byte and servo returned 
 Return Packet Error (higher byte; bit 15 - 8)<br/>
 Servo Returned Error (lower byte; bit 7 - 0)
 
-|Bit|<Return Packet Error>|
+|Bit|Return Packet Error|
 |:--|:--------------------|
 |15 |--                   |
 |14 |--                   |
@@ -19,7 +19,7 @@ Servo Returned Error (lower byte; bit 7 - 0)
 |9  |Wrong header         |
 |8  |Packet lost or receive time out|
 |   | |
-|Bit|<Servo Returned Error>|
+|Bit|Servo Returned Error|
 |7  |--                   |
 |6  |Instruction error    |
 |5  |Overload error       |
