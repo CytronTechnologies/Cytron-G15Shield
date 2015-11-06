@@ -9,7 +9,7 @@ Return Packet Error (higher byte; bit 15 - 8)<br/>
 Servo Returned Error (lower byte; bit 7 - 0)
 
 |Bit|Return Packet Error|
-|:--|:--------------------|
+|:--:|:--------------------|
 |15 |--                   |
 |14 |--                   |
 |13 |--                   |
