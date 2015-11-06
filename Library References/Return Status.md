@@ -28,4 +28,4 @@ Servo Returned Error (lower byte; bit 7 - 0)
 |1  |Angle limit error    |
 |0  |Input voltage error  |
 
-For Servo Returned Error, please refer to [G15 User Manual](http://www.cytron.com.my/viewProduct.php?pid=NzgIAyY1NzkGDzITKjMRIYYmFZsFAKCVNg2CEuolxkk=) for more info.
+For Servo Returned Error, please refer to [G15 User Manual](https://drive.google.com/file/d/0BzFWfMiqqjyqRWZyeVE5UGhoNDQ/view) for more info.
