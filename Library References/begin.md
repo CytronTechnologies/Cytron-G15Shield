@@ -16,4 +16,6 @@ begin(baudrate);
 None
 
 ## Example ##
-		g15.begin(19200);
+```
+g15.begin(19200);
+```
