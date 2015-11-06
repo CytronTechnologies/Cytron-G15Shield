@@ -10,7 +10,7 @@ Cytron_G15Shield.h
 		uint16_t setTemperatureLimit(servoID, uint8_t temperature);
 
 ## Parameters ##
-**servoID**: Current G15's servo ID<br/>
+**servoID**: G15's servo ID<br/>
 **temperature**: G15's temperature limit, starts from 0 to 120 degree celcius
 
 ## Returns ##

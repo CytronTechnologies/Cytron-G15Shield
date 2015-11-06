@@ -143,7 +143,7 @@ class Cytron_G15Shield
 		uint16_t setAngleLimit(uint8_t servoID, uint16_t cwAngle, uint16_t ccwAngle);
 		uint16_t setTorqueLimit(uint8_t servoID, uint16_t torqueLimit); //in RAM area
 		uint16_t setTemperatureLimit(uint8_t servoID, uint8_t temperature);
-		uint16_t setVoltageLimit(uint8_t servoID, uint8_t voltageLow, uint8_t voltageHigh); 
+		uint16_t setVoltageLimit(uint8_t servoID, uint8_t voltageLow, uint8_t voltageHigh);
 		
 		uint16_t setID(uint8_t servoID, uint8_t newID);
 		

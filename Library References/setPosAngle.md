@@ -10,7 +10,7 @@ Cytron_G15Shield.h
 		uint16_t setPos(servoID, uint16_t angle);
 
 ## Parameters ##
-**servoID**: Current G15's servo ID<br/>
+**servoID**: G15's servo ID<br/>
 **angle**: G15's goal angle position, starts from 0 to 359
 
 ## Returns ##

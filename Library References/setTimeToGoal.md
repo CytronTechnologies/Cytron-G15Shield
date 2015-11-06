@@ -11,7 +11,7 @@ Cytron_G15Shield.h
 		uint16_t setTimeToGoal(servoID, uint16_t time);
 
 ## Parameters ##
-**servoID**: Current G15's servo ID<br/>
+**servoID**: G15's servo ID<br/>
 **time**: 1 to 4095 which represents 0.1 seconds to 409.5 seconds.
 
 ## Returns ##

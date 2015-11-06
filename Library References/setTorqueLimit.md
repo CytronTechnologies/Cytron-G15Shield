@@ -10,7 +10,7 @@ Cytron_G15Shield.h
 		uint16_t setTorqueLimit(servoID, uint16_t torqueLimit);
 
 ## Parameters ##
-**servoID**: Current G15's servo ID<br/>
+**servoID**: G15's servo ID<br/>
 **torqueLimit**: 0 to 1023
 
 ## Returns ##

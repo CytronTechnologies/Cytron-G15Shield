@@ -10,7 +10,7 @@ Cytron_G15Shield.h
 		uint16_t setLED(servoID, uint8_t onOff);
 
 ## Parameters ##
-**servoID**: Current G15's servo ID<br/>
+**servoID**: G15's servo ID<br/>
 **onOff**: ON to turn on the G15's LED, OFF to turn off the G15's LED
 
 ## Returns ##

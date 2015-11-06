@@ -10,7 +10,7 @@ Cytron_G15Shield.h
 		uint16_t setSpeed(servoID, uint16_t speed);
 
 ## Parameters ##
-**servoID**: Current G15's servo ID<br/>
+**servoID**: G15's servo ID<br/>
 **speed**: G15's moving speed, starts from 0 to 1023
 
 ## Returns ##
