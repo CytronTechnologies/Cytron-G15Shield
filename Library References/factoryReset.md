@@ -7,7 +7,9 @@ This function resets servo's control registers values to factory default. This i
 Cytron_G15Shield.h
 
 ## Prototype ##
-		uint16_t factoryReset(servoID);
+```c
+uint16_t factoryReset(servoID);
+```
 
 ## Parameters ##
 **servoID**: G15's servo ID
@@ -16,4 +18,6 @@ Cytron_G15Shield.h
 Error status in word. If return is non-zero, error occurred. Refer Return Status.
 
 ## Example ##
-		g15.factoryReset(1); // Factory reset for G15 with ID number 1
+```c
+g15.factoryReset(1); // Factory reset for G15 with ID number 1
+```

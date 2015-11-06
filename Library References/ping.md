@@ -7,7 +7,9 @@ To request the status packet from a particular servo. The data byte is passed by
 Cytron_G15Shield.h
 
 ## Prototype ##
-		uint16_t ping(servoID, uint8_t *data);
+```c
+uint16_t ping(servoID, uint8_t *data);
+```
 
 ## Parameters ##
 **servoID**: G15's servo ID<br/>
@@ -17,9 +19,11 @@ Cytron_G15Shield.h
 Error status in word. If return is non-zero, error occurred. Refer Return Status.
 
 ## Example ##
-		word status;
-		byte data[2];
-		status = g15.ping(1, data); // Ping G15 with ID number 1, if succeed correct ID number will be stored in data
+```c
+word status;
+byte data[2];
+status = g15.ping(1, data); // Ping G15 with ID number 1, if succeed correct ID number will be stored in data
+```
 
 ## See Also ##
 Return Status

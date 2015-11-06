@@ -7,7 +7,9 @@ This is a macro which convert the position value of 0 to 1087 to angle values in
 Cytron_G15Shield.h
 
 ## Prototype ##
-		ConvertPosToAngle(position);
+```c
+ConvertPosToAngle(position);
+```
 
 ## Parameters ##
 **position**: Angle position value, 0 to 1087
@@ -16,5 +18,7 @@ Cytron_G15Shield.h
 Angle position value, 0 to 359
 
 ## Example ##
-		word position;
-		position = ConvertPosToAngle(1000); // Convert position to angle value
+```c
+word position;
+position = ConvertPosToAngle(1000); // Convert position to angle value
+```

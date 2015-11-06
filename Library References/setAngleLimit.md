@@ -7,7 +7,9 @@ This function sets rotation angle limits of G15. This angle limit can limit G15 
 Cytron_G15Shield.h
 
 ## Prototype ##
-		uint16_t setAngleLimit(servoID, uint16_t cwAngle, uint16_t ccwAngle);
+```c
+uint16_t setAngleLimit(servoID, uint16_t cwAngle, uint16_t ccwAngle);
+```
 
 ## Parameters ##
 **servoID**: G15's servo ID<br/>
@@ -19,4 +21,6 @@ Note: Please refer G15 user manual for the operation sector when CW angle > CCW 
 Error status in word. If return is non-zero, error occurred. Refer Return Status.
 
 ## Example ##
-		g15.setAngleLimit(1, 100, 256); // Set rotation angle limit of G15 with ID number 1
+```c
+g15.setAngleLimit(1, 100, 256); // Set rotation angle limit of G15 with ID number 1
+```

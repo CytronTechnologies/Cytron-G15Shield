@@ -7,7 +7,9 @@ This function is to set G15's goal position in angle degree.
 Cytron_G15Shield.h
 
 ## Prototype ##
-		uint16_t setPos(servoID, uint16_t angle);
+```c
+uint16_t setPos(servoID, uint16_t angle);
+```
 
 ## Parameters ##
 **servoID**: G15's servo ID<br/>
@@ -17,4 +19,6 @@ Cytron_G15Shield.h
 Error status in word. If return is non-zero, error occurred. Refer Return Status.
 
 ## Example ##
-		g15.setPosAngle(1, 180); // Command G15 with ID number 1 to move to angle 180
+```c
+g15.setPosAngle(1, 180); // Command G15 with ID number 1 to move to angle 180
+```

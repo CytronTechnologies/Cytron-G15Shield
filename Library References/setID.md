@@ -7,7 +7,9 @@ This function is to change a current servo ID to a new ID.
 Cytron_G15Shield.h
 
 ## Prototype ##
-		uint16_t setID(servoID, uint8_t newID);
+```c
+uint16_t setID(servoID, uint8_t newID);
+```
 
 ## Parameters ##
 **servoID**: Current G15's servo ID<br/>
@@ -17,4 +19,6 @@ Cytron_G15Shield.h
 Error status in word. If return is non-zero, error occurred. Refer Return Status.
 
 ## Example ##
-		g15.setID(1, 2); // Change current ID 1 to new ID 2
+```c
+g15.setID(1, 2); // Change current ID 1 to new ID 2
+```

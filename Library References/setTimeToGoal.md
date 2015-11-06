@@ -8,7 +8,9 @@ This is an alternative way to set the rotation speed of G15 Cube Servo.
 Cytron_G15Shield.h
 
 ## Prototype ##
-		uint16_t setTimeToGoal(servoID, uint16_t time);
+```c
+uint16_t setTimeToGoal(servoID, uint16_t time);
+```
 
 ## Parameters ##
 **servoID**: G15's servo ID<br/>
@@ -18,4 +20,6 @@ Cytron_G15Shield.h
 Error status in word. If return is non-zero, error occurred. Refer Return Status.
 
 ## Example ##
-		g15.setTimeToGoal(1, 200); // Set G15 with ID number 1 with time to goal position 200 seconds
+```c
+g15.setTimeToGoal(1, 200); // Set G15 with ID number 1 with time to goal position 200 seconds
+```

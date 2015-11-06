@@ -7,7 +7,9 @@ This function is to control the G15's LED.
 Cytron_G15Shield.h
 
 ## Prototype ##
-		uint16_t setLED(servoID, uint8_t onOff);
+```c
+uint16_t setLED(servoID, uint8_t onOff);
+```
 
 ## Parameters ##
 **servoID**: G15's servo ID<br/>
@@ -17,7 +19,9 @@ Cytron_G15Shield.h
 Error status in word. If return is non-zero, error occurred. Refer Return Status.
 
 ## Example ##
-		g15.setLED(1, ON); // Turn on LED for G15 with ID number 1
-		delay(1000);
-		g15.setLED(1, OFF); // Turn off LED for G15 with ID number 1
-		delay(1000);
+```c
+g15.setLED(1, ON); // Turn on LED for G15 with ID number 1
+delay(1000);
+g15.setLED(1, OFF); // Turn off LED for G15 with ID number 1
+delay(1000);
+```

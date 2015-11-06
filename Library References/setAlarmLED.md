@@ -7,7 +7,9 @@ This function sets the G15 alarm LED to blink on defined errors.
 Cytron_G15Shield.h
 
 ## Prototype ##
-		uint16_t setAlarmLED(servoID, uint8_t alarmLED);
+```c
+uint16_t setAlarmLED(servoID, uint8_t alarmLED);
+```
 
 ## Parameters ##
 **servoID**: G15's servo ID<br/>
@@ -25,4 +27,6 @@ Bit 0: Input Voltage Error
 Error status in word. If return is non-zero, error occurred. Refer Return Status.
 
 ## Example ##
-		g15.setAlarmLED(1, 0x7F); // Set G15 with ID number 1 to alarm LED on all errors
+```c
+g15.setAlarmLED(1, 0x7F); // Set G15 with ID number 1 to alarm LED on all errors
+```

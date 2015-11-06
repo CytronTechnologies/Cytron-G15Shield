@@ -7,7 +7,9 @@ This function sets the G15 to shutdown on defined errors.
 Cytron_G15Shield.h
 
 ## Prototype ##
-		uint16_t setAlarmShutDown(servoID, uint8_t alarm);
+```c
+uint16_t setAlarmShutDown(servoID, uint8_t alarm);
+```
 
 ## Parameters ##
 **servoID**: G15's servo ID<br/>
@@ -25,4 +27,6 @@ Bit 0: Input Voltage Error
 Error status in word. If return is non-zero, error occurred. Refer Return Status.
 
 ## Example ##
-		g15.setAlarmShutDown(1, 0x36); // Set G15 with ID number 1 to shut down on Overload Error, Checksum Error, Overheating Error and Angle Limit Error
+```c
+g15.setAlarmShutDown(1, 0x36); // Set G15 with ID number 1 to shut down on Overload Error, Checksum Error, Overheating Error and Angle Limit Error
+```

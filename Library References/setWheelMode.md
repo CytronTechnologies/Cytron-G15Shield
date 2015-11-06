@@ -7,7 +7,9 @@ This function is to set G15 to wheel mode which able to rotate continously in th
 Cytron_G15Shield.h
 
 ## Prototype ##
-		uint16_t setWheelMode(servoID);
+```c
+uint16_t setWheelMode(servoID);
+```
 
 ## Parameters ##
 **servoID**: G15's servo ID
@@ -16,4 +18,6 @@ Cytron_G15Shield.h
 Error status in word. If return is non-zero, error occurred. Refer Return Status.
 
 ## Example ##
-		g15.setWheelMode(1); // Set G15 with ID number 1 to wheel mode
+```c
+g15.setWheelMode(1); // Set G15 with ID number 1 to wheel mode
+```
