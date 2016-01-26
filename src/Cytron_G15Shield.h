@@ -116,6 +116,7 @@ class Cytron_G15Shield
 		Cytron_G15Shield(uint8_t rxpin, uint8_t txpin, uint8_t ctrlpin); // SoftwareSerial
 		Cytron_G15Shield(uint8_t ctrlpin); // HardwareSerial
 		void begin(uint32_t baudrate);
+		void end(void);
 		
 		//*=========Wheel Mode=====================================================================================
 		//360 degree continous rotation. change CW and CCW Angle Limits to same value

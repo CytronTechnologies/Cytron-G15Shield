@@ -36,6 +36,10 @@ void setup()
   digitalWrite(LED, LOW);
   delay(500);
   digitalWrite(LED, HIGH);
+
+  // Make sure G15 in position mode
+  g15.exitWheelMode(G15_1);
+  g15.exitWheelMode(G15_2);
 }
 
 void loop()

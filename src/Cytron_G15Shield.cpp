@@ -8,7 +8,7 @@ Modified:
                                           - Restructure the code style to follow standard Arduino library
 */
 
-#include "HardwareSerial.h"
+//#include "HardwareSerial.h"
 #include "Cytron_G15Shield.h"
 
 boolean hardwareSerial;
@@ -51,6 +51,21 @@ void Cytron_G15Shield::begin(uint32_t baudrate)
   }
   pinMode(_ctrlpin, OUTPUT);
   setTxMode();
+}
+
+void Cytron_G15Shield::end(void)
+{
+  if(_rxpin == 0 &&_txpin == 1)
+  {
+    Serial.end();
+  }
+  else
+  {
+    pinMode(_rxpin, INPUT);
+    pinMode(_txpin, INPUT);
+    G15Serial->end();
+  }
+  pinMode(_ctrlpin, INPUT);
 }
 
 void Cytron_G15Shield::setTxMode(void)
@@ -548,6 +563,8 @@ uint16_t Cytron_G15Shield::isMoving(uint8_t servoID, uint8_t *data)
     
 	return(sendPacket(servoID, iREAD_DATA, data, 2));
 }
+
+
 
 //******************************************************************
 //*	SET ACTION
